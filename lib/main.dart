@@ -6,10 +6,23 @@ import 'package:flutter_application_2/screens/onboarding_screen.dart';
 import 'package:flutter_application_2/screens/signup_screen.dart';
 import 'package:flutter_application_2/utils/colors.dart';
 
-void main() { // async has to be used
+// void main() { // async has to be used
+//   WidgetsFlutterBinding.ensureInitialized();
+//   // await Firebase.initializeApp();
+//   Firebase.initializeApp().then((_) {
+//     runApp(MyApp());
+//   }).catchError((e) {
+//     print('Error initializing Firebase: $e');
+//   });
+//   runApp(const MyApp());
+// }
+Future firebaseInitalise()async{
   WidgetsFlutterBinding.ensureInitialized();
-  // await Firebase.initializeApp();
-  runApp(const MyApp());
+  await Firebase.initializeApp();
+}
+void main() { // async has to be used
+  firebaseInitalise();
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {

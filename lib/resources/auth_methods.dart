@@ -5,5 +5,15 @@ class AuthMethods {
   final _userRef = FirebaseFirestore.instance.collection('users');
   final _auth = FirebaseAuth.instance;
 
-  signUpUser() async {}
+  Future<bool> signUpUser(
+    String username,
+    String email,
+    String password
+    ) async {
+     try{
+
+     } on FirebaseAuthException catch(e){
+        print(e.message!);
+     }
+  }
 }
