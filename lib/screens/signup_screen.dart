@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_2/resources/auth_methods.dart';
+import 'package:flutter_application_2/screens/home_screen.dart';
 import 'package:flutter_application_2/widgets/custom_button.dart';
 import 'package:flutter_application_2/widgets/custom_textfield.dart';
 
@@ -14,6 +16,19 @@ class _SignupScreenState extends State<SignupScreen> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+  final AuthMethods _authMethods = AuthMethods();
+  void signUpUser() async {
+    bool res = await _authMethods.signUpUser(
+      context,
+       _usernameController.text, 
+       _emailController.text, 
+       _passwordController.text
+      );
+      if(res){
+        Navigator.pushNamed(context, HomeScreen.routeName);
+      }
+  }
+
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;

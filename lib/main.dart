@@ -1,10 +1,13 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_2/providers/user_provider.dart';
+import 'package:flutter_application_2/screens/home_screen.dart';
 import 'package:flutter_application_2/screens/login_screen.dart';
 import 'package:flutter_application_2/screens/onboarding_screen.dart';
 import 'package:flutter_application_2/screens/signup_screen.dart';
 import 'package:flutter_application_2/utils/colors.dart';
+import 'package:provider/provider.dart';
 
 // void main() { // async has to be used
 //   WidgetsFlutterBinding.ensureInitialized();
@@ -16,13 +19,17 @@ import 'package:flutter_application_2/utils/colors.dart';
 //   });
 //   runApp(const MyApp());
 // }
-Future firebaseInitalise()async{
+Future firebaseInitalise() async{
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
 }
 void main() { // async has to be used
   firebaseInitalise();
-  runApp(MyApp());
+  runApp(MultiProvider(providers: [
+    ChangeNotifierProvider(
+      create: (_)=> UserProvider(),
+      ),
+  ], child: const MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -55,6 +62,7 @@ class MyApp extends StatelessWidget {
         OnboardingScreen.routeName: (context) => const OnboardingScreen(),
         LoginScreen.routeName:(context) => const LoginScreen(),
         SignupScreen.routeName:(context) => const SignupScreen(),
+        HomeScreen.routeName:(context) => const HomeScreen(),
       },
       home: const OnboardingScreen(),
     );
